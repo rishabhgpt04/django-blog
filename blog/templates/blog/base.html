@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+      type="text/css"
+      media="screen"
+      charset="utf-8"
+    />
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="loader">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'post_list' %}">Tech Blog</a>
+      <div class="collapse navbar-collapse nav-custom">
+        <ul class="navbar-nav mr-atuo list-nav">
+          <li class="nav-item active custom-navbar">
+            <a class="nav-link" href="{% url 'about' %}">About </a>
+          </li>
+          <li class="nav-item custom-navbar">
+            <a class="nav-link" href="https://www.github.com">Github </a>
+          </li>
+          <li class="nav-item custom-navbar">
+            <a class="nav-link" href="https://www.linkedin.com">LinkedIn </a>
+          </li>
+        
+       
+          {% if user.is_authenticated %}
+          <li style="margin-left: 200px;">
+            <a href="{% url 'post_new' %}">New Post</a>
+          </li>
+          <li>
+            <a href="{% url 'post_draft_list' %}">Drafts</a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}">Logout</a>
+          </li>
+          <li>
+            <a>Welcome {{user.username}}</a>
+          </li>
+          {% else %}
+          <li style="margin-left: 600px;">
+            <a href="{% url 'login' %}"
+              ><span class="glyphicon glyphicon-user"></span
+            ></a>
+          </li>
+
+          {% endif %}
+        </ul>
+      </div>
+    </nav> 
+    <div class="content container">{% block content %} {% endblock %}</div>
+  </body>
+</html>
